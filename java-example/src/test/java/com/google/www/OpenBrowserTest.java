@@ -27,7 +27,7 @@ public class OpenBrowserTest {
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
+  public void testOpenBrowser() throws Exception {
     driver.get("https://meduza.io/");
   }
 
