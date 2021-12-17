@@ -1,9 +1,8 @@
 package ru.stqa.selenium.litecart.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+
+import java.util.List;
 
 
 public class HelperBase {
@@ -41,9 +40,16 @@ public class HelperBase {
         try {
             wd.findElement(locator);
             return true;
+        } catch (InvalidSelectorException e) {
+            throw e;
         } catch (NoSuchElementException ex) {
             return false;
         }
+    }
+
+    public List<WebElement> getElementsList(By locator){
+        List<WebElement> elements = wd.findElements(locator);
+        return elements;
     }
 
     public String getText(String locator) {

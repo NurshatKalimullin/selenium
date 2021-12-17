@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,6 +25,7 @@ public class ApplicationManager {
     WebDriver wd;
 
     private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
 
 
     public ApplicationManager(String browser) {
@@ -69,6 +69,7 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
         sessionHelper = new SessionHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
@@ -83,4 +84,7 @@ public class ApplicationManager {
     }
 
 
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
+    }
 }
