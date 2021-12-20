@@ -26,6 +26,7 @@ public class ApplicationManager {
 
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
+    private ShopHelper shopHelper;
 
 
     public ApplicationManager(String browser) {
@@ -70,7 +71,10 @@ public class ApplicationManager {
         wd.get(properties.getProperty("web.baseUrl"));
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
-        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+        shopHelper = new ShopHelper(wd);
+        if (properties.getProperty("web.baseUrl").equals("http://localhost/litecart/admin")) {
+            sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+        }
     }
 
 
@@ -86,5 +90,9 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public ShopHelper getShopHelper() {
+        return shopHelper;
     }
 }

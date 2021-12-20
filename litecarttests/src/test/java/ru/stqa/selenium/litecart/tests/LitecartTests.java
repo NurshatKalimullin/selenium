@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class LitecartTests extends TestBase {
@@ -20,6 +21,19 @@ public class LitecartTests extends TestBase {
             elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
             assertTrue(app.getNavigationHelper().isElementPresent(
                     By.xpath(String.format("//h1[contains(text(),'%s')]", headers[i]))));
+        }
+    }
+
+    @Test
+    public void testGoodsStickers() {
+        String[] boxes = {"box-most-popular", "box-campaigns", "box-latest-products"};
+        for (String box : boxes ) {
+            List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath(String.format("//div[@id='%s']//li[@class='product column shadow hover-light']", box)));
+            for (WebElement element : elements) {
+                List<WebElement> stickers = element.findElements(By.xpath(".//div[contains(@class, 'sticker')]"));
+                System.out.println(stickers.size());
+                assertEquals(stickers.size(), 1);
+            }
         }
     }
 }
