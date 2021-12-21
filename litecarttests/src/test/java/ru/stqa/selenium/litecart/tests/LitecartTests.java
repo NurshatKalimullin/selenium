@@ -26,14 +26,11 @@ public class LitecartTests extends TestBase {
 
     @Test
     public void testGoodsStickers() {
-        String[] boxes = {"box-most-popular", "box-campaigns", "box-latest-products"};
-        for (String box : boxes ) {
-            List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath(String.format("//div[@id='%s']//li[@class='product column shadow hover-light']", box)));
-            for (WebElement element : elements) {
-                List<WebElement> stickers = element.findElements(By.xpath(".//div[contains(@class, 'sticker')]"));
-                System.out.println(stickers.size());
-                assertEquals(stickers.size(), 1);
-            }
+        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//li[@class='product column shadow hover-light']"));
+        for (WebElement element : elements) {
+            List<WebElement> stickers = element.findElements(By.xpath(".//div[contains(@class, 'sticker')]"));
+            System.out.println(stickers.size());
+            assertEquals(stickers.size(), 1);
         }
     }
 }
