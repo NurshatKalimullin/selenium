@@ -52,11 +52,7 @@ public class HelperBase {
         return elements;
     }
 
-    public String getText(String locator) {
-        return String.valueOf(wd.findElement(By.xpath(locator)));
-    }
-
-    public String getAttributeValue(String element, String attribute) {
-        return wd.findElement(By.xpath(element)).getAttribute(attribute);
+    public String getAttributeValue(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
     }
 }
