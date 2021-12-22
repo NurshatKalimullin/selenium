@@ -75,4 +75,29 @@ public class LitecartTests extends TestBase {
             i = i + 1;
         }
     }
+
+
+    @Test
+    public void testGeoZonesListSorting(){
+        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+        app.getNavigationHelper().clickOnMenuItem(elements, 5);
+        List<WebElement> rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
+        int i = 0;
+        while (i < rows.size()) {
+            app.getNavigationHelper().clickOnCountry(rows.get(i).findElement(By.xpath(".//i[@class='fa fa-pencil']")));
+            List<WebElement> zonesTableRows = app.getNavigationHelper().getElementsList(By.xpath("//table[@id='table-zones']//tr"));
+            String zones = "";
+            for (int j = 1; j < zonesTableRows.size() - 1; j++) {
+                zones = zones + app.getSessionHelper().getAttributeValue(zonesTableRows.get(j).findElement(By.xpath("./td[3]//option[@selected='selected']")), "textContent") + ",";
+            }
+            String[] zonesArray = zones.split(",");
+            Arrays.sort(zonesArray);
+            System.out.println(Arrays.toString(zonesArray));
+            assertTrue(Arrays.equals(zonesArray, zones.split(",")));
+            elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+            app.getNavigationHelper().clickOnMenuItem(elements, 5);
+            rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
+            i = i + 1;
+        }
+    }
 }
