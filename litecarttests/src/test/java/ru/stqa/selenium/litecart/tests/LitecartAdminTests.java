@@ -4,14 +4,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class LitecartTests extends TestBase {
+public class LitecartAdminTests extends TestBase {
 
     @Test
     public void testMenuNavigation(){
@@ -26,14 +25,6 @@ public class LitecartTests extends TestBase {
         }
     }
 
-    @Test
-    public void testGoodsStickers() {
-        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
-        for (WebElement element : elements) {
-            List<WebElement> stickers = element.findElements(By.xpath("./div[contains(@class, 'sticker')]"));
-            assertEquals(stickers.size(), 1);
-        }
-    }
 
     @Test
     public void testCountriesListSorting() {

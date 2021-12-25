@@ -55,4 +55,9 @@ public class HelperBase {
     public String getAttributeValue(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
+
+    public WebElement getElement(By locator) {
+        WebElement element = wd.findElement(locator);
+        return element;
+    }
 }

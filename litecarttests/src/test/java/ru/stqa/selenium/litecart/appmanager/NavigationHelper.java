@@ -23,4 +23,8 @@ public class NavigationHelper extends HelperBase{
     public void cancelCountryForm() {
         wd.findElement(By.xpath("//button[@name='cancel']"));
     }
+
+    public void openMerchandisePage(List<WebElement> merchandise, int i) {
+        merchandise.get(i).click();
+    }
 }

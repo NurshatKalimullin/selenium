@@ -3,7 +3,8 @@
 <suite name="Suite1" verbose="1" >
     <test name="Authentication" >
         <classes>
-            <class name="ru.stqa.selenium.litecart.tests.LitecartTests" />
+            <class name="ru.stqa.selenium.litecart.tests.LitecartAdminTests" />
+            <class name="ru.stqa.selenium.litecart.tests.LitecartShopTests" />
         </classes>
     </test>
 </suite>
