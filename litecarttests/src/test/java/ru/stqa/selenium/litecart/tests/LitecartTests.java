@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class LitecartTests extends TestBase {
         List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
         for (WebElement element : elements) {
             List<WebElement> stickers = element.findElements(By.xpath("./div[contains(@class, 'sticker')]"));
-            System.out.println(stickers.size());
             assertEquals(stickers.size(), 1);
         }
     }
@@ -40,13 +40,13 @@ public class LitecartTests extends TestBase {
         List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
         app.getNavigationHelper().clickOnMenuItem(elements, 2);
         List<WebElement> rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']/td[5]"));
-        String countries = "";
-        for (WebElement row : rows) {
-            countries = countries + app.getSessionHelper().getAttributeValue(row, "textContent") + ",";
+        String[] countriesArray  = new String[rows.size()];
+        for (int i = 0; i < rows.size(); i++) {
+            countriesArray[i] = app.getSessionHelper().getAttributeValue(rows.get(i), "textContent");
         }
-        String[] countriesArray = countries.split(",");
+        String[] copiedCountriesArray = Arrays.copyOf(countriesArray, rows.size());
         Arrays.sort(countriesArray);
-        assertTrue(Arrays.equals(countriesArray, countries.split(",")));
+        assertTrue(Arrays.equals(countriesArray, copiedCountriesArray));
     }
 
     @Test
@@ -59,14 +59,13 @@ public class LitecartTests extends TestBase {
             if (!rows.get(i).findElement(By.xpath("./td[6]")).getAttribute("textContent").equals("0")) {
                 app.getNavigationHelper().clickOnCountry(rows.get(i).findElement(By.xpath(".//i[@class='fa fa-pencil']")));
                 List<WebElement> zonesTableRows = app.getNavigationHelper().getElementsList(By.xpath("//table[@id='table-zones']//tr"));
-                String zones = "";
-                for (int j = 1; j < zonesTableRows.size(); j++) {
-                    zones = zones + app.getSessionHelper().getAttributeValue(zonesTableRows.get(j).findElement(By.xpath("./td[3]")), "textContent") + ",";
+                String[] zonesArray  = new String[zonesTableRows.size() - 2];
+                for (int j = 1; j < zonesTableRows.size() - 1; j++) {
+                    zonesArray[j - 1] = app.getSessionHelper().getAttributeValue(zonesTableRows.get(j).findElement(By.xpath("./td[3]")), "textContent");
                 }
-                String[] zonesArray = zones.split(",");
+                String[] copiedZonesArray = Arrays.copyOf(zonesArray, zonesArray.length);
                 Arrays.sort(zonesArray);
-                System.out.println(Arrays.toString(zonesArray));
-                assertTrue(Arrays.equals(zonesArray, zones.split(",")));
+                assertTrue(Arrays.equals(zonesArray, copiedZonesArray));
                 elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
                 app.getNavigationHelper().clickOnMenuItem(elements, 2);
                 //app.getNavigationHelper().cancelCountryForm(); //this click does not work
