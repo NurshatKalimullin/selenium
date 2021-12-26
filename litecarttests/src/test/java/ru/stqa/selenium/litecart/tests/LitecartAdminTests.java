@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class LitecartAdminTests extends TestBase {
+public class LitecartAdminTests extends AdminTestBase {
 
     @Test
     public void testMenuNavigation(){

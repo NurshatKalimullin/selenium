@@ -4,10 +4,8 @@ import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -36,19 +34,33 @@ public class ApplicationManager {
 
     }
 
-    public void init() throws IOException {
+    public void initShop() throws IOException {
+        initBrowser();
+        wd.get(properties.getProperty("web.shopUrl"));
+    }
+
+    public void initAdmin() throws IOException {
+        initBrowser();
+        wd.get(properties.getProperty("web.adminUrl"));
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+
+    }
+
+    private void initBrowser() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
         if (browser.equals(BrowserType.FIREFOX)) {
             //let's use FireFox Nightly
+            /*
             FirefoxBinary firefoxBinary = new FirefoxBinary(
                     new File("C:\\Program Files\\Firefox Nightly\\firefox.exe"));
             DesiredCapabilities desired = DesiredCapabilities.firefox();
             FirefoxOptions options = new FirefoxOptions();
             desired.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options.setBinary(firefoxBinary));
+             */
 
-            wd = new FirefoxDriver(options);
+            wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
             //open maximized Chrome explorer
             ChromeOptions options = new ChromeOptions();
@@ -58,8 +70,9 @@ public class ApplicationManager {
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability(ChromeOptions.CAPABILITY, options);
             wd = new ChromeDriver(caps);
-        } else if (browser.equals(BrowserType.IE)) {
-            wd = new InternetExplorerDriver();
+        } else if (browser.equals(BrowserType.EDGE)) {
+            System.setProperty("webdriver.edge.driver", "C:\\Windows\\System32\\msedgedriver.exe");
+            wd = new EdgeDriver();
         }
 
         //let's print browser settings on console
@@ -68,13 +81,9 @@ public class ApplicationManager {
 
         //if element is not presented test will wait 1 seconds for element to load
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         shopHelper = new ShopHelper(wd);
-        if (properties.getProperty("web.baseUrl").equals("http://localhost/litecart/admin")) {
-            sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-        }
     }
 
 

@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeSuite;
 import ru.stqa.selenium.litecart.appmanager.ApplicationManager;
 
 
-public class ShopTestBase {
+public class AdminTestBase {
 
 
     protected static final ApplicationManager app
@@ -17,7 +17,7 @@ public class ShopTestBase {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp(ITestContext context) throws Exception {
-        app.initShop();
+        app.initAdmin();
         context.setAttribute("app", app);
     }
 
