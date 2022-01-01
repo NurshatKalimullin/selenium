@@ -82,7 +82,6 @@ public class LitecartShopTests extends ShopTestBase {
         String customerEmail = String.format("user%s@mail.com", now);
         String password = "12345";
         List<WebElement> loginFormElements = app.getNavigationHelper().getElementsList(By.xpath("//form[@name='login_form']//tr"));
-        System.out.println(loginFormElements.size());
         app.getNavigationHelper().clickOnLoginFormItem(loginFormElements, 4);
         app.getShopHelper().fillCustomerForm(new CustomerData("Frodo", "Baggins",
                 "Shire, The Hole", "09475", "Hobbiton", customerEmail,
