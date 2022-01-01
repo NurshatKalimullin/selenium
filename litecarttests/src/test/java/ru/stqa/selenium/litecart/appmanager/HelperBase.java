@@ -1,7 +1,9 @@
 package ru.stqa.selenium.litecart.appmanager;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -27,6 +29,15 @@ public class HelperBase {
         }
     }
 
+    protected void select(By locator, String value) {
+        wd.findElement(locator).click();
+        new Select(wd.findElement(locator)).selectByVisibleText(value);
+    }
+
+    protected void attache(By locator, File file) {
+        wd.findElement(locator).sendKeys(file.getAbsolutePath());
+    }
+
     public boolean isAlertPresent() {
         try {
             wd.switchTo().alert();
@@ -50,6 +61,10 @@ public class HelperBase {
     public List<WebElement> getElementsList(By locator){
         List<WebElement> elements = wd.findElements(locator);
         return elements;
+    }
+
+    public void clickByIndex(List<WebElement> elements, int i){
+        elements.get(i).click();
     }
 
     public String getAttributeValue(WebElement element, String attribute) {

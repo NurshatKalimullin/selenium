@@ -3,7 +3,9 @@ package ru.stqa.selenium.litecart.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import ru.stqa.selenium.litecart.model.ProductData;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -88,5 +90,24 @@ public class LitecartAdminTests extends AdminTestBase {
             rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
             i = i + 1;
         }
+    }
+
+    @Test
+    public void testProductCreation(){
+        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+        app.getNavigationHelper().clickOnMenuItem(elements, 1);
+        List<WebElement> buttons = app.getNavigationHelper().getElementsList(By.xpath("//td[@id='content']//a[@class='button']"));
+        app.getNavigationHelper().startAddingNewProduct(buttons, 1);
+        File productImage = new File("src/test/resources/redDuck.png");
+        String shortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue.";
+        String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue. Cras scelerisque dui non consequat sollicitudin. Sed pretium tortor ac auctor molestie. Nulla facilisi. Maecenas pulvinar nibh vitae lectus vehicula semper. Donec et aliquet velit. Curabitur non ullamcorper mauris. In hac habitasse platea dictumst. Phasellus ut pretium justo, sit amet bibendum urna. Maecenas sit amet arcu pulvinar, facilisis quam at, viverra nisi. Morbi sit amet adipiscing ante. Integer imperdiet volutpat ante, sed venenatis urna volutpat a. Proin justo massa, convallis vitae consectetur sit amet, facilisis id libero.";
+        List<WebElement> tabs = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='index']/li"));
+        app.getAdminHelper().fillProductData(tabs, new ProductData("Luxury Red Duck", "RD003",
+                "1", "pcs", "3-5 days", "Temporary sold out",
+                productImage, "01012022", "31012022", "ACME Corp.",
+                shortDescription, description, "25", "US Dollars",
+                "30", "05012022", "0000",
+                "15012022", "2300", "22"));
+        app.getAdminHelper().submitProductFrom();
     }
 }

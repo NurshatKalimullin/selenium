@@ -25,6 +25,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private ShopHelper shopHelper;
+    private AdminHelper adminHelper;
 
 
     public ApplicationManager(String browser) {
@@ -40,6 +41,7 @@ public class ApplicationManager {
     }
 
     public void initAdmin() throws IOException {
+
         initBrowser();
         wd.get(properties.getProperty("web.adminUrl"));
         sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
@@ -83,6 +85,7 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
+        adminHelper = new AdminHelper(wd);
         shopHelper = new ShopHelper(wd);
     }
 
@@ -99,6 +102,10 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public AdminHelper getAdminHelper() {
+        return adminHelper;
     }
 
     public ShopHelper getShopHelper() {

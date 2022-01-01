@@ -27,4 +27,8 @@ public class NavigationHelper extends HelperBase{
     public void openMerchandisePage(List<WebElement> merchandise, int i) {
         merchandise.get(i).click();
     }
+
+    public void startAddingNewProduct(List<WebElement> button, int i) {
+        button.get(i).click();
+    }
 }
