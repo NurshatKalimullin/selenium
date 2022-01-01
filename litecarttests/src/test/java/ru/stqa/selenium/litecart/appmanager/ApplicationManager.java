@@ -41,10 +41,9 @@ public class ApplicationManager {
     }
 
     public void initAdmin() throws IOException {
-
         initBrowser();
         wd.get(properties.getProperty("web.adminUrl"));
-        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+        sessionHelper.loginAdminUser(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 
     }
 
@@ -111,4 +110,5 @@ public class ApplicationManager {
     public ShopHelper getShopHelper() {
         return shopHelper;
     }
+
 }

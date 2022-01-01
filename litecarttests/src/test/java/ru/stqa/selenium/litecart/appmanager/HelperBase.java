@@ -34,6 +34,12 @@ public class HelperBase {
         new Select(wd.findElement(locator)).selectByVisibleText(value);
     }
 
+    protected void selectByInput(By locator1, By locator2, By locator3, String value) {
+        wd.findElement(locator1).click();
+        type(locator2, value);
+        click(locator3);
+    }
+
     protected void attache(By locator, File file) {
         wd.findElement(locator).sendKeys(file.getAbsolutePath());
     }
@@ -75,4 +81,5 @@ public class HelperBase {
         WebElement element = wd.findElement(locator);
         return element;
     }
+
 }

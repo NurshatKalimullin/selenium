@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.selenium.litecart.model.ProductData;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -109,5 +110,10 @@ public class LitecartAdminTests extends AdminTestBase {
                 "30", "05012022", "0000",
                 "15012022", "2300", "22"));
         app.getAdminHelper().submitProductFrom();
+    }
+
+    @Test
+    public void test1() throws IOException {
+        app.getAdminHelper().turnCaptchaOff();
     }
 }

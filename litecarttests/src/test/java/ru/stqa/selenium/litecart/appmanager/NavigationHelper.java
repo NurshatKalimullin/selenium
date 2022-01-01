@@ -3,6 +3,7 @@ package ru.stqa.selenium.litecart.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.selenium.litecart.model.CustomerData;
 
 import java.util.List;
 
@@ -31,4 +32,13 @@ public class NavigationHelper extends HelperBase{
     public void startAddingNewProduct(List<WebElement> button, int i) {
         button.get(i).click();
     }
+
+    public void clickOnLoginFormItem(List<WebElement> loginFormElements, int i) {
+        loginFormElements.get(i).click();
+    }
+
+    public void submitAccountCreation() {
+        click(By.name("create_account"));
+    }
+
 }

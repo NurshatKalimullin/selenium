@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.selenium.litecart.model.CustomerData;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -70,5 +72,24 @@ public class LitecartShopTests extends ShopTestBase {
         merchandiseCampaignPriceSizeString = merchandise.findElement(By.xpath(".//strong[@class='campaign-price']")).getCssValue("font-size");
         merchandiseCampaignPriceSize = Float.parseFloat(merchandiseCampaignPriceSizeString.substring(0, merchandiseCampaignPriceSizeString.length() - 2));
         Assert.assertTrue(merchandiseRegularPriceSize < merchandiseCampaignPriceSize);
+    }
+
+    @Test
+    public void testCustomerOnboarding() throws IOException {
+        app.getAdminHelper().turnCaptchaOff();
+        app.getShopHelper().openShopUrl();
+        long now = System.currentTimeMillis();
+        String customerEmail = String.format("user%s@mail.com", now);
+        String password = "12345";
+        List<WebElement> loginFormElements = app.getNavigationHelper().getElementsList(By.xpath("//form[@name='login_form']//tr"));
+        System.out.println(loginFormElements.size());
+        app.getNavigationHelper().clickOnLoginFormItem(loginFormElements, 4);
+        app.getShopHelper().fillCustomerForm(new CustomerData("Frodo", "Baggins",
+                "Shire, The Hole", "09475", "Hobbiton", customerEmail,
+                "United States", "+18143511244", password));
+        app.getNavigationHelper().submitAccountCreation();
+        app.getSessionHelper().logOutFromShop();
+        app.getSessionHelper().loginCustomer(customerEmail, password);
+        app.getSessionHelper().logOutFromShop();
     }
 }
