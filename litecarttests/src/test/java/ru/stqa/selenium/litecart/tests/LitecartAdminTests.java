@@ -111,4 +111,17 @@ public class LitecartAdminTests extends AdminTestBase {
         app.getAdminHelper().submitProductFrom();
     }
 
+
+    @Test
+    public void testLinks() {
+        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+        app.getNavigationHelper().clickOnMenuItem(elements, 2);
+        app.getAdminHelper().clickAddNewCountryButton();
+        List<WebElement> links = app.getNavigationHelper().getElementsList(By.xpath("//i[@class='fa fa-external-link']"));
+        int i = 0;
+        while (i < links.size()) {
+            app.getAdminHelper().checkNewWindow(links.get(i));
+            i++;
+        }
+    }
 }

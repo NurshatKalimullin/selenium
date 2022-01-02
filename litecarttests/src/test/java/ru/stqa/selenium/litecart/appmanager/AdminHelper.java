@@ -84,4 +84,9 @@ public class AdminHelper extends HelperBase{
         click(By.name("save"));
     }
 
+    public void clickAddNewCountryButton() {
+        click(By.xpath("//a[@class='button']"));
+    }
+
+
 }

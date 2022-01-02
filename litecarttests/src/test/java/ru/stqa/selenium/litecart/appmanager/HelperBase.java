@@ -5,7 +5,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -104,10 +107,28 @@ public class HelperBase {
         wait.until(attributeContains(locator, attribute, expectedValue));
     }
 
-    public void waitElementVisibility(By locator) {
+    public void checkNewWindow(WebElement element){
         WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
-        wait.until(visibilityOfAllElementsLocatedBy(locator));
+        String originalWindow = wd.getWindowHandle();
+        Set<String> oldWindows = wd.getWindowHandles();
+        element.click();
+        wait.until(numberOfWindowsToBe(oldWindows.size() + 1));
+        String newWindow = findNewWindow(oldWindows);
+        wd.switchTo().window(newWindow);
+        wd.close();
+        wd.switchTo().window(originalWindow);
     }
 
+    private String findNewWindow(Set<String> oldWindows) {
+        String window = null;
+        Set<String> newWindows = wd.getWindowHandles();
+        for (String newWindow : newWindows) {
+            if (!oldWindows.contains(newWindow)) {
+                window = newWindow;
+                break;
+            }
+        }
+        return window;
+    }
 
 }

@@ -118,7 +118,6 @@ public class LitecartShopTests extends ShopTestBase {
                 app.getShopHelper().chooseMerchandiseToDelete(elements, 0);
             }
             i = i - Integer.parseInt(app.getShopHelper().getMerchandiseQuantity());
-            System.out.println(i);
             app.getShopHelper().removeMerchandiseFromCart();
             Thread.sleep(500); //it's much more reliable than Selenium functions
         }

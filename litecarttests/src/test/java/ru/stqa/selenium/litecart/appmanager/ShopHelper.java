@@ -69,4 +69,5 @@ public class ShopHelper extends HelperBase {
     public void chooseMerchandiseToDelete(List<WebElement> elements, int index) {
         clickByIndex(elements, index);
     }
+
 }
