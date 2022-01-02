@@ -81,7 +81,7 @@ public class ApplicationManager {
 
 
         //if element is not presented test will wait 1 seconds for element to load
-        wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         adminHelper = new AdminHelper(wd);

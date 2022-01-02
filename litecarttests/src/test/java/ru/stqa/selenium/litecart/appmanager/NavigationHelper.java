@@ -14,7 +14,7 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void clickOnMenuItem(List<WebElement> elements, int i) {
-        elements.get(i).click();
+        clickByIndex(elements, i);
     }
 
     public void clickOnCountry(WebElement element) {
@@ -26,19 +26,26 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void openMerchandisePage(List<WebElement> merchandise, int i) {
-        merchandise.get(i).click();
+        clickByIndex(merchandise, i);
     }
 
     public void startAddingNewProduct(List<WebElement> button, int i) {
-        button.get(i).click();
+        clickByIndex(button, i);
     }
 
     public void clickOnLoginFormItem(List<WebElement> loginFormElements, int i) {
-        loginFormElements.get(i).click();
+        clickByIndex(loginFormElements, i);
     }
 
     public void submitAccountCreation() {
         click(By.name("create_account"));
     }
 
+    public void goToShopHomePage() {
+        click(By.xpath("//i[@class='fa fa-home']"));
+    }
+
+    public void openShopCart() {
+        click(By.xpath("//div[@id='cart']"));
+    }
 }

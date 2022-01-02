@@ -25,7 +25,7 @@ public class SessionHelper extends HelperBase {
         click(By.xpath("//button[@name='login']"));
     }
 
-    public void logOutFromShop() {
+    public void logOutCustomer() {
         click(By.xpath("//div[@id='box-account']//li[4]/a"));
     }
 }

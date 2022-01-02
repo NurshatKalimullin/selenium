@@ -3,6 +3,7 @@ package ru.stqa.selenium.litecart.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.litecart.model.CustomerData;
@@ -10,6 +11,7 @@ import ru.stqa.selenium.litecart.model.CustomerData;
 import java.io.IOException;
 import java.util.List;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.testng.Assert.assertEquals;
 
 public class LitecartShopTests extends ShopTestBase {
@@ -74,6 +76,7 @@ public class LitecartShopTests extends ShopTestBase {
         Assert.assertTrue(merchandiseRegularPriceSize < merchandiseCampaignPriceSize);
     }
 
+
     @Test
     public void testCustomerOnboarding() throws IOException {
         app.getAdminHelper().turnCaptchaOff();
@@ -87,8 +90,37 @@ public class LitecartShopTests extends ShopTestBase {
                 "Shire, The Hole", "09475", "Hobbiton", customerEmail,
                 "United States", "+18143511244", password));
         app.getNavigationHelper().submitAccountCreation();
-        app.getSessionHelper().logOutFromShop();
+        app.getSessionHelper().logOutCustomer();
         app.getSessionHelper().loginCustomer(customerEmail, password);
-        app.getSessionHelper().logOutFromShop();
+        app.getSessionHelper().logOutCustomer();
+    }
+
+    @Test
+    public void testCart() throws InterruptedException {
+        List<WebElement> goods = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
+        int i = 0;
+        while (i < 3) {
+            app.getNavigationHelper().openMerchandisePage(goods, 1);
+            if (app.getShopHelper().isElementPresent(By.xpath("//select[@name='options[Size]']"))) {
+                app.getShopHelper().selectSize(By.xpath("//select[@name='options[Size]']"), "Small");
+            }
+            app.getShopHelper().inputMerchandiseQuantity("1");
+            app.getShopHelper().addMerchandiseIntoCart();
+            app.getShopHelper().checkElementValue(By.xpath("//span[@class='quantity']"), "textContent", String.valueOf(i + 1));
+            app.getNavigationHelper().goToShopHomePage();
+            i++;
+            goods = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
+        }
+        app.getNavigationHelper().openShopCart();
+        while (i > 0) {
+            if (app.getShopHelper().isElementPresent(By.xpath("//ul[@class='shortcuts']"))) {
+                List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='shortcuts']//a"));
+                app.getShopHelper().chooseMerchandiseToDelete(elements, 0);
+            }
+            i = i - Integer.parseInt(app.getShopHelper().getMerchandiseQuantity());
+            System.out.println(i);
+            app.getShopHelper().removeMerchandiseFromCart();
+            Thread.sleep(500); //it's much more reliable than Selenium functions
+        }
     }
 }

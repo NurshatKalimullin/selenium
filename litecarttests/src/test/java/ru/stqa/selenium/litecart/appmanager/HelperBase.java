@@ -2,9 +2,13 @@ package ru.stqa.selenium.litecart.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
 public class HelperBase {
@@ -64,13 +68,25 @@ public class HelperBase {
         }
     }
 
+
+    //this function will check element existence with no waiting
+    boolean isElementNotPresent(WebDriver wd, By locator) {
+        try {
+            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            return wd.findElements(locator).size() == 0;
+        } finally {
+            wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
+    }
+
+
     public List<WebElement> getElementsList(By locator){
         List<WebElement> elements = wd.findElements(locator);
         return elements;
     }
 
-    public void clickByIndex(List<WebElement> elements, int i){
-        elements.get(i).click();
+    public void clickByIndex(List<WebElement> elements, int index){
+        elements.get(index).click();
     }
 
     public String getAttributeValue(WebElement element, String attribute) {
@@ -81,5 +97,17 @@ public class HelperBase {
         WebElement element = wd.findElement(locator);
         return element;
     }
+
+
+    public void checkElementValue(By locator, String attribute, String expectedValue) {
+        WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
+        wait.until(attributeContains(locator, attribute, expectedValue));
+    }
+
+    public void waitElementVisibility(By locator) {
+        WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
+        wait.until(visibilityOfAllElementsLocatedBy(locator));
+    }
+
 
 }
