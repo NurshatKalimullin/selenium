@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
-import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
 public class HelperBase {
@@ -134,4 +133,8 @@ public class HelperBase {
         return str1 == null ? str2 == null : str1.equals(str2);
     }
 
+    public void testElementClickable(By locator){
+        WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
+        wait.until(elementToBeClickable(locator));
+    }
 }

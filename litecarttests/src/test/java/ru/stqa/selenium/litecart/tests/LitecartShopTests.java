@@ -110,14 +110,17 @@ public class LitecartShopTests extends ShopTestBase {
             goods = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
         }
         app.getNavigationHelper().openShopCart();
-        while (i > 0) {
+        int goodsInCart = app.getNavigationHelper().getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
+        while (goodsInCart > 0){
             if (app.getShopHelper().isElementPresent(By.xpath("//ul[@class='shortcuts']"))) {
                 List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='shortcuts']//a"));
                 app.getShopHelper().chooseMerchandiseToDelete(elements, 0);
+            } else if (goodsInCart == 1) {
+                break;
             }
-            i = i - Integer.parseInt(app.getShopHelper().getMerchandiseQuantity());
+            app.getAdminHelper().testElementClickable(By.xpath("//button[@name='remove_cart_item']"));
             app.getShopHelper().removeMerchandiseFromCart();
-            Thread.sleep(500); //it's much more reliable than Selenium functions
+            goodsInCart = app.getNavigationHelper().getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
         }
     }
 }
