@@ -16,14 +16,17 @@ public class LitecartAdminTests extends AdminTestBase {
 
     @Test
     public void testMenuNavigation(){
-        List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
-        String[] headers = {" Template", " Catalog", " Countries", " Currencies", " Customers", " Geo Zones", " Languages", " Job Modules", " Orders", " Pages", " Monthly Sales", " Settings",
-        " Slides", " Tax Classes", " Search Translations", " Users", " vQmods"};
-        for (int i = 0; i < elements.size(); i++) {
-            app.getNavigationHelper().clickOnMenuItem(elements, i);
-            elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+        List<WebElement> menuItems = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
+        for (int i = 0; i < menuItems.size(); i++) {
+            app.getNavigationHelper().clickOnMenuItem(menuItems, i);
+            List<WebElement> submenuItems = app.getNavigationHelper().getElementsList(By.xpath("//li[@id='app-']//li"));
+            for (int j = 0; j < submenuItems.size(); j++) {
+                app.getNavigationHelper().clickOnMenuItem(submenuItems, j);
+                submenuItems = app.getNavigationHelper().getElementsList(By.xpath("//li[@id='app-']//li"));
+            }
+            menuItems = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
             assertTrue(app.getNavigationHelper().isElementPresent(
-                    By.xpath(String.format("//h1[contains(text(),'%s')]", headers[i]))));
+                    By.xpath(String.format("//h1"))));
         }
     }
 
@@ -113,8 +116,7 @@ public class LitecartAdminTests extends AdminTestBase {
                 "15012022", "2300", "22"));
         app.getAdminHelper().submitProductFrom();
         List<WebElement> after = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
-        
-        Assert.assertTrue(after.size() == before.size() + 1);
+        Assert.assertEquals(before.size() + 1, after.size());
     }
 
 
