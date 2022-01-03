@@ -2,6 +2,7 @@ package ru.stqa.selenium.litecart.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.litecart.model.ProductData;
 
@@ -96,6 +97,8 @@ public class LitecartAdminTests extends AdminTestBase {
     public void testProductCreation(){
         List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
         app.getNavigationHelper().clickOnMenuItem(elements, 1);
+        app.getNavigationHelper().openMerchandiseFolder(By.xpath("//tr[@class='row'][2]//a"));
+        List<WebElement> before = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
         List<WebElement> buttons = app.getNavigationHelper().getElementsList(By.xpath("//td[@id='content']//a[@class='button']"));
         app.getNavigationHelper().startAddingNewProduct(buttons, 1);
         File productImage = new File("src/test/resources/redDuck.png");
@@ -109,6 +112,9 @@ public class LitecartAdminTests extends AdminTestBase {
                 "30", "05012022", "0000",
                 "15012022", "2300", "22"));
         app.getAdminHelper().submitProductFrom();
+        List<WebElement> after = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
+        
+        Assert.assertTrue(after.size() == before.size() + 1);
     }
 
 

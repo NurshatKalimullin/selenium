@@ -5,13 +5,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfWindowsToBe;
 
 
 public class HelperBase {
@@ -129,6 +128,10 @@ public class HelperBase {
             }
         }
         return window;
+    }
+
+    public static boolean booleanEqual(String str1, String str2) {
+        return str1 == null ? str2 == null : str1.equals(str2);
     }
 
 }

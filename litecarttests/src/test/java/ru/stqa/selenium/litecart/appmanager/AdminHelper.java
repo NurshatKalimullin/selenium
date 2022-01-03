@@ -29,8 +29,14 @@ public class AdminHelper extends HelperBase{
 
     public void fillProductData(List<WebElement> tabs,ProductData ProductData) {
         click(By.xpath("//input[@type='radio' and @value='1']"));
-        click(By.xpath("//input[@name='categories[]' and @value='0']"));
-        click(By.xpath("//input[@name='categories[]' and @value='1']"));
+        if (booleanEqual(getAttributeValue(wd.findElement(
+                By.xpath("//input[@name='categories[]' and @value='0']")),"checked"), "true")) {
+            click(By.xpath("//input[@name='categories[]' and @value='0']"));
+        }
+        if (booleanEqual(getAttributeValue(wd.findElement(
+                By.xpath("//input[@name='categories[]' and @value='1']")),"checked"), "null")){
+            click(By.xpath("//input[@name='categories[]' and @value='1']"));
+        }
         type(By.xpath("//input[@name='name[en]']"), ProductData.getProductName());
         type(By.xpath("//input[@name='code']"), ProductData.getProductCode());
         type(By.xpath("//input[@name='quantity']"), ProductData.getQuantity());

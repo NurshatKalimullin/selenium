@@ -3,7 +3,6 @@ package ru.stqa.selenium.litecart.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.stqa.selenium.litecart.model.CustomerData;
 
 import java.util.List;
 
@@ -47,5 +46,9 @@ public class NavigationHelper extends HelperBase{
 
     public void openShopCart() {
         click(By.xpath("//div[@id='cart']"));
+    }
+
+    public void openMerchandiseFolder(By locator) {
+        click(locator);
     }
 }

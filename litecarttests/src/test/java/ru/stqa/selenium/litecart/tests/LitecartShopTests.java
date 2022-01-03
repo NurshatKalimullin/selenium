@@ -3,7 +3,6 @@ package ru.stqa.selenium.litecart.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.litecart.model.CustomerData;
@@ -11,7 +10,6 @@ import ru.stqa.selenium.litecart.model.CustomerData;
 import java.io.IOException;
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.testng.Assert.assertEquals;
 
 public class LitecartShopTests extends ShopTestBase {
