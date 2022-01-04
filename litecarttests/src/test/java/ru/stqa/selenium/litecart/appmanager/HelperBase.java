@@ -1,10 +1,12 @@
 package ru.stqa.selenium.litecart.appmanager;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -137,4 +139,21 @@ public class HelperBase {
         WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
         wait.until(elementToBeClickable(locator));
     }
+
+    public void openUrl(String URL) {
+        wd.navigate().to(URL);
+    }
+
+    public Set<String> getBrowserLogs() {
+        Set<String> logLevels = wd.manage().logs().getAvailableLogTypes();
+        Set<String > logs = new HashSet<>();
+        for (String logLevel : logLevels) {
+            for (LogEntry l : wd.manage().logs().get(logLevel).getAll()) {
+                logs.add(String.valueOf(l));
+            }
+        }
+        return logs;
+    }
+
+
 }

@@ -3,7 +3,6 @@ package ru.stqa.selenium.litecart.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.selenium.litecart.model.CustomerData;
 
 import java.io.File;
@@ -11,8 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 
 public class ShopHelper extends HelperBase {

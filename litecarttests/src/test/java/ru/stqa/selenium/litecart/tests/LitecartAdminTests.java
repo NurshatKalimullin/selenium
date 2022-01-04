@@ -132,4 +132,18 @@ public class LitecartAdminTests extends AdminTestBase {
             i++;
         }
     }
+
+    @Test
+    public void checkBrowserLogs(){
+        app.getShopHelper().openUrl("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
+        List<WebElement> rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
+        for (int i = 3; i < rows.size(); i++) {
+            rows.get(i).findElement(By.xpath(".//a")).click();
+            Assert.assertTrue(app.getShopHelper().getBrowserLogs().isEmpty());
+            app.getShopHelper().openUrl("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
+            rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
+
+        }
+    }
+
 }
