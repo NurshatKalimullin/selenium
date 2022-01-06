@@ -47,8 +47,12 @@ public class ShopHelper extends HelperBase {
     }
 
     public void removeMerchandiseFromCart() {
-        click(By.name("remove_cart_item"));
+        WebElement element = wd.findElement(By.name("remove_cart_item"));
+        element.click();
+        checkElementDeleted(element);
     }
+
+
 
     public void selectSize(By locator, String size) {
         click(locator);

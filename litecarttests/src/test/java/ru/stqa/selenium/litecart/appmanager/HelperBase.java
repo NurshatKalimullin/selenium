@@ -140,6 +140,11 @@ public class HelperBase {
         wait.until(elementToBeClickable(locator));
     }
 
+    public void checkElementDeleted(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
+        wait.until(stalenessOf(element));
+    }
+
     public void openUrl(String URL) {
         wd.navigate().to(URL);
     }

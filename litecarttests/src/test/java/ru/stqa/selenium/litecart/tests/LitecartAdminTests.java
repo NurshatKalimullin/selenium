@@ -23,10 +23,12 @@ public class LitecartAdminTests extends AdminTestBase {
             for (int j = 0; j < submenuItems.size(); j++) {
                 app.getNavigationHelper().clickOnMenuItem(submenuItems, j);
                 submenuItems = app.getNavigationHelper().getElementsList(By.xpath("//li[@id='app-']//li"));
+                assertTrue(app.getNavigationHelper().isElementPresent(
+                        By.xpath("//h1")));
             }
             menuItems = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
             assertTrue(app.getNavigationHelper().isElementPresent(
-                    By.xpath(String.format("//h1"))));
+                    By.xpath("//h1")));
         }
     }
 
