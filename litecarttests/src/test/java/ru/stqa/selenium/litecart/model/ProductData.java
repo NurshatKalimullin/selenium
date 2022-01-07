@@ -4,56 +4,28 @@ import java.io.File;
 
 public class ProductData {
 
-    private final String productName;
-    private final String productCode;
-    private final String quantity;
-    private final String quantityUnit;
-    private final String deliveryStatus;
-    private final String soldOutStatus;
-    private final File productImage;
-    private final String dateValidFrom;
-    private final String dateValidTo;
-    private final String manufacturer;
-    private final String shortDescription;
-    private final String description;
-    private final String purchasePriceAmount;
-    private final String purchasePriceCurrency;
-    private final String usdPriceAmount;
-    private final String campaignStartDate;
-    private final String campaignStartTime;
-    private final String campaignEndDate;
-    private final String campaignEndTime;
-    private final String campaignUSDPriceAmount;
+    private String productName;
+    private String productCode;
+    private String quantity;
+    private String quantityUnit;
+    private String deliveryStatus;
+    private String soldOutStatus;
+    private File productImage;
+    private String dateValidFrom;
+    private String dateValidTo;
+    private String manufacturer;
+    private String shortDescription;
+    private String description;
+    private String purchasePriceAmount;
+    private String purchasePriceCurrency;
+    private String usdPriceAmount;
+    private String campaignStartDate;
+    private String campaignStartTime;
+    private String campaignEndDate;
+    private String campaignEndTime;
+    private String campaignUSDPriceAmount;
 
-    public ProductData(String productName, String productCode, String quantity, String quantityUnit,
-                       String deliveryStatus, String soldOutStatus, File productImage, String dateValidFrom,
-                       String dateValidTo, String manufacturer, String shortDescription, String description,
-                       String purchasePriceAmount, String purchasePriceCurrency, String usdPriceAmount,
-                       String campaignStartDate, String campaignStartTime, String campaignEndDate,
-                       String campaignEndTime, String campaignUSDPriceAmount){
 
-        this.productName = productName;
-        this.productCode = productCode;
-        this.quantity = quantity;
-        this.quantityUnit = quantityUnit;
-        this.deliveryStatus = deliveryStatus;
-        this.soldOutStatus = soldOutStatus;
-        this.productImage = productImage;
-        this.dateValidFrom = dateValidFrom;
-        this.dateValidTo = dateValidTo;
-        this.manufacturer = manufacturer;
-        this.shortDescription = shortDescription;
-        this.description = description;
-        this.purchasePriceAmount = purchasePriceAmount;
-        this.purchasePriceCurrency = purchasePriceCurrency;
-        this.usdPriceAmount = usdPriceAmount;
-        this.campaignStartDate = campaignStartDate;
-        this.campaignStartTime = campaignStartTime;
-        this.campaignEndDate = campaignEndDate;
-        this.campaignEndTime = campaignEndTime;
-        this.campaignUSDPriceAmount = campaignUSDPriceAmount;
-
-    }
 
     public String getProductName() {
         return productName;
@@ -108,5 +80,107 @@ public class ProductData {
     public String getCampaignEndTime() { return campaignEndTime; }
 
     public String getCampaignUSDPriceAmount() { return campaignUSDPriceAmount; }
+
+
+
+    public ProductData withProductName(String productName) {
+        this.productName = productName;
+        return this;
+    }
+
+    public ProductData withProductCode(String productCode) {
+        this.productCode = productCode;
+        return this;
+    }
+
+    public ProductData withQuantity(String quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public ProductData withQuantityUnit(String quantityUnit) {
+        this.quantityUnit = quantityUnit;
+        return this;
+    }
+
+    public ProductData withDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+        return this;
+    }
+
+    public ProductData withSoldOutStatus(String soldOutStatus) {
+        this.soldOutStatus = soldOutStatus;
+        return this;
+    }
+
+    public ProductData withProductImage(File productImage) {
+        this.productImage = productImage;
+        return this;
+    }
+
+    public ProductData withDateValidFrom(String dateValidFrom) {
+        this.dateValidFrom = dateValidFrom;
+        return this;
+    }
+
+    public ProductData withDateValidTo(String dateValidTo) {
+        this.dateValidTo = dateValidTo;
+        return this;
+    }
+
+    public ProductData withManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+        return this;
+    }
+
+    public ProductData withShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+        return this;
+    }
+
+    public ProductData withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public ProductData withPurchasePriceAmount(String purchasePriceAmount) {
+        this.purchasePriceAmount = purchasePriceAmount;
+        return this;
+    }
+
+    public ProductData withPurchasePriceCurrency(String purchasePriceCurrency) {
+        this.purchasePriceCurrency = purchasePriceCurrency;
+        return this;
+    }
+
+    public ProductData withUsdPriceAmount(String usdPriceAmount) {
+        this.usdPriceAmount = usdPriceAmount;
+        return this;
+    }
+
+    public ProductData withCampaignStartDate(String campaignStartDate) {
+        this.campaignStartDate = campaignStartDate;
+        return this;
+    }
+
+    public ProductData withCampaignStartTime(String campaignStartTime) {
+        this.campaignStartTime = campaignStartTime;
+        return this;
+    }
+
+    public ProductData withCampaignEndDate(String campaignEndDate) {
+        this.campaignEndDate = campaignEndDate;
+        return this;
+    }
+
+    public ProductData withCampaignEndTime(String campaignEndTime) {
+        this.campaignEndTime = campaignEndTime;
+        return this;
+    }
+
+    public ProductData withCampaignUSDPriceAmount(String campaignUSDPriceAmount) {
+        this.campaignUSDPriceAmount = campaignUSDPriceAmount;
+        return this;
+    }
 
 }

@@ -95,9 +95,9 @@ public class LitecartShopTests extends ShopTestBase {
         String password = "12345";
         List<WebElement> loginFormElements = app.getNavigationHelper().getElementsList(By.xpath("//form[@name='login_form']//tr"));
         app.getNavigationHelper().clickOnLoginFormItem(loginFormElements, 4);
-        app.getShopHelper().fillCustomerForm(new CustomerData("Frodo", "Baggins",
-                "Shire, The Hole", "09475", "Hobbiton", customerEmail,
-                "United States", "+18143511244", password));
+        app.getShopHelper().fillCustomerForm(new CustomerData().withFirstName("Frodo").withLastName("Baggins")
+                .withAddress("Shire, The Hole").withPostCode("09475").withCity("Hobbiton").withEmail(customerEmail)
+                .withCountry("United States").withPhoneNumber("+18143511244").withPassword(password));
         app.getNavigationHelper().submitAccountCreation();
         app.getSessionHelper().logOutCustomer();
         app.getSessionHelper().loginCustomer(customerEmail, password);
@@ -129,7 +129,7 @@ public class LitecartShopTests extends ShopTestBase {
             } else if (goodsInCart == 1) {
                 break;
             }
-            app.getAdminHelper().testElementClickable(By.xpath("//button[@name='remove_cart_item']"));
+            app.getAdminHelper().isElementClickable(By.xpath("//button[@name='remove_cart_item']"));
             app.getShopHelper().removeMerchandiseFromCart();
             goodsInCart = app.getNavigationHelper().getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
         }

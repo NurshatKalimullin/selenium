@@ -1,29 +1,16 @@
 package ru.stqa.selenium.litecart.model;
 
 public class CustomerData {
-    private final String firstName;
-    private final String lastName;
-    private final String address;
-    private final String postCode;
-    private final String city;
-    private final String email;
-    private final String country;
-    private final String phoneNumber;
-    private final String password;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String postCode;
+    private String city;
+    private String email;
+    private String country;
+    private String phoneNumber;
+    private String password;
 
-
-    public CustomerData(String firstName, String lastName, String address, String postCode, String city,
-                        String email, String country, String phoneNumber, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.postCode = postCode;
-        this.city = city;
-        this.email = email;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
 
 
     public String getFirstName() {
@@ -60,5 +47,52 @@ public class CustomerData {
 
     public String getCountry() {
         return country;
+    }
+
+
+    public CustomerData withFirstName(String firstName){
+        this.firstName = firstName;
+        return this;
+    }
+
+    public CustomerData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public CustomerData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public CustomerData withPostCode(String postCode) {
+        this.postCode = postCode;
+        return this;
+    }
+
+    public CustomerData withCity(String city) {
+        CustomerData.this.city = city;
+        return this;
+    }
+
+    public CustomerData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public CustomerData withCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public CustomerData withPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public CustomerData withPassword(String password) {
+        this.password = password;
+        return this;
+
     }
 }

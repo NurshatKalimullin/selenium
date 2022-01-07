@@ -110,12 +110,13 @@ public class LitecartAdminTests extends AdminTestBase {
         String shortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue.";
         String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue. Cras scelerisque dui non consequat sollicitudin. Sed pretium tortor ac auctor molestie. Nulla facilisi. Maecenas pulvinar nibh vitae lectus vehicula semper. Donec et aliquet velit. Curabitur non ullamcorper mauris. In hac habitasse platea dictumst. Phasellus ut pretium justo, sit amet bibendum urna. Maecenas sit amet arcu pulvinar, facilisis quam at, viverra nisi. Morbi sit amet adipiscing ante. Integer imperdiet volutpat ante, sed venenatis urna volutpat a. Proin justo massa, convallis vitae consectetur sit amet, facilisis id libero.";
         List<WebElement> tabs = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='index']/li"));
-        app.getAdminHelper().fillProductData(tabs, new ProductData("Luxury Red Duck", "RD003",
-                "1", "pcs", "3-5 days", "Temporary sold out",
-                productImage, "01012022", "31012022", "ACME Corp.",
-                shortDescription, description, "25", "US Dollars",
-                "30", "05012022", "0000",
-                "15012022", "2300", "22"));
+        app.getAdminHelper().fillProductData(tabs, new ProductData().withProductName("Luxury Red Duck").withProductCode("RD003")
+                .withQuantity("1").withQuantityUnit("pcs").withDeliveryStatus("3-5 days").withSoldOutStatus("Temporary sold out")
+                .withProductImage(productImage).withDateValidFrom("01012022").withDateValidTo("31012022")
+                .withManufacturer("ACME Corp.").withShortDescription(shortDescription).withDescription(description)
+                .withPurchasePriceAmount("25").withPurchasePriceCurrency("US Dollars").withUsdPriceAmount("30")
+                .withCampaignStartDate("05012022").withCampaignStartTime("0000").withCampaignEndDate("15012022")
+                .withCampaignEndTime("2300").withCampaignUSDPriceAmount("22"));
         app.getAdminHelper().submitProductFrom();
         List<WebElement> after = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
         Assert.assertEquals(before.size() + 1, after.size());

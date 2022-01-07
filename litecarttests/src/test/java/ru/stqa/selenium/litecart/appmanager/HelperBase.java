@@ -135,12 +135,12 @@ public class HelperBase {
         return str1 == null ? str2 == null : str1.equals(str2);
     }
 
-    public void testElementClickable(By locator){
+    public void isElementClickable(By locator){
         WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
         wait.until(elementToBeClickable(locator));
     }
 
-    public void checkElementDeleted(WebElement element) {
+    public void isElementDeleted(WebElement element) {
         WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
         wait.until(stalenessOf(element));
     }
