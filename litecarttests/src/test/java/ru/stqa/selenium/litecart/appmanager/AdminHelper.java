@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.stqa.selenium.litecart.model.ProductData;
+import ru.stqa.selenium.litecart.model.Product;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,7 +27,7 @@ public class AdminHelper extends HelperBase{
         sessionHelper = new SessionHelper(wd);
     }
 
-    public void fillProductData(List<WebElement> tabs,ProductData ProductData) {
+    public void fillProductData(List<WebElement> tabs, Product product) {
         click(By.xpath("//input[@type='radio' and @value='1']"));
         if (booleanEqual(getAttributeValue(wd.findElement(
                 By.xpath("//input[@name='categories[]' and @value='0']")),"checked"), "true")) {
@@ -37,27 +37,27 @@ public class AdminHelper extends HelperBase{
                 By.xpath("//input[@name='categories[]' and @value='1']")),"checked"), "null")){
             click(By.xpath("//input[@name='categories[]' and @value='1']"));
         }
-        type(By.xpath("//input[@name='name[en]']"), ProductData.getProductName());
-        type(By.xpath("//input[@name='code']"), ProductData.getProductCode());
-        type(By.xpath("//input[@name='quantity']"), ProductData.getQuantity());
-        select(By.name("quantity_unit_id"), ProductData.getQuantityUnit());
-        select(By.name("delivery_status_id"), ProductData.getDeliveryStatus());
-        select(By.name("sold_out_status_id"), ProductData.getSoldOutStatus());
-        attache(By.name("new_images[]"), ProductData.getProductImage());
-        type(By.name("date_valid_from"), ProductData.getDateValidFrom());
-        type(By.name("date_valid_to"), ProductData.getDateValidTo());
+        type(By.xpath("//input[@name='name[en]']"), product.getProductName());
+        type(By.xpath("//input[@name='code']"), product.getProductCode());
+        type(By.xpath("//input[@name='quantity']"), product.getQuantity());
+        select(By.name("quantity_unit_id"), product.getQuantityUnit());
+        select(By.name("delivery_status_id"), product.getDeliveryStatus());
+        select(By.name("sold_out_status_id"), product.getSoldOutStatus());
+        attache(By.name("new_images[]"), product.getProductImage());
+        type(By.name("date_valid_from"), product.getDateValidFrom());
+        type(By.name("date_valid_to"), product.getDateValidTo());
         clickByIndex(tabs, 1);
-        select(By.name("manufacturer_id"), ProductData.getManufacturer());
-        type(By.name("short_description[en]"), ProductData.getShortDescription());
-        type(By.className("trumbowyg-editor"), ProductData.getDescription());
+        select(By.name("manufacturer_id"), product.getManufacturer());
+        type(By.name("short_description[en]"), product.getShortDescription());
+        type(By.className("trumbowyg-editor"), product.getDescription());
         clickByIndex(tabs, 3);
-        type(By.name("purchase_price"), ProductData.getPurchasePriceAmount());
-        select(By.name("purchase_price_currency_code"), ProductData.getPurchasePriceCurrency());
-        type(By.name("prices[USD]"), ProductData.getUsdPriceAmount());
+        type(By.name("purchase_price"), product.getPurchasePriceAmount());
+        select(By.name("purchase_price_currency_code"), product.getPurchasePriceCurrency());
+        type(By.name("prices[USD]"), product.getUsdPriceAmount());
         click(By.id("add-campaign"));
-        typeCampaignsDate(By.name("campaigns[new_1][start_date]"), ProductData.getCampaignStartDate(), ProductData.getCampaignStartTime())  ;
-        typeCampaignsDate(By.name("campaigns[new_1][end_date]"), ProductData.getCampaignEndDate(), ProductData.getCampaignEndTime());
-        type(By.name("campaigns[new_1][USD]"), ProductData.getCampaignUSDPriceAmount());
+        typeCampaignsDate(By.name("campaigns[new_1][start_date]"), product.getCampaignStartDate(), product.getCampaignStartTime())  ;
+        typeCampaignsDate(By.name("campaigns[new_1][end_date]"), product.getCampaignEndDate(), product.getCampaignEndTime());
+        type(By.name("campaigns[new_1][USD]"), product.getCampaignUSDPriceAmount());
     }
 
     private void typeCampaignsDate(By locator, String date, String time) {

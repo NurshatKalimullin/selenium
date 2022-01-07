@@ -1,10 +1,13 @@
 package ru.stqa.selenium.litecart.tests;
 
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.litecart.model.ProductData;
+import ru.stqa.selenium.litecart.model.Product;
 
 import java.io.File;
 import java.util.Arrays;
@@ -75,7 +78,7 @@ public class LitecartAdminTests extends AdminTestBase {
 
 
     @Test
-    public void testGeoZonesListSorting(){
+    public void checkGeoZonesListSorting(){
         List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
         app.getNavigationHelper().clickOnMenuItem(elements, 5);
         List<WebElement> rows = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
@@ -98,8 +101,8 @@ public class LitecartAdminTests extends AdminTestBase {
         }
     }
 
-    @Test
-    public void testProductCreation(){
+    @Test(dataProvider = "validProduct", dataProviderClass = DataProviders.class)
+    public void testProductCreation(Product product){
         List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@id='box-apps-menu']/li[@id='app-']"));
         app.getNavigationHelper().clickOnMenuItem(elements, 1);
         app.getNavigationHelper().openMerchandiseFolder(By.xpath("//tr[@class='row'][2]//a"));
@@ -110,13 +113,7 @@ public class LitecartAdminTests extends AdminTestBase {
         String shortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue.";
         String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sollicitudin ante massa, eget ornare libero porta congue. Cras scelerisque dui non consequat sollicitudin. Sed pretium tortor ac auctor molestie. Nulla facilisi. Maecenas pulvinar nibh vitae lectus vehicula semper. Donec et aliquet velit. Curabitur non ullamcorper mauris. In hac habitasse platea dictumst. Phasellus ut pretium justo, sit amet bibendum urna. Maecenas sit amet arcu pulvinar, facilisis quam at, viverra nisi. Morbi sit amet adipiscing ante. Integer imperdiet volutpat ante, sed venenatis urna volutpat a. Proin justo massa, convallis vitae consectetur sit amet, facilisis id libero.";
         List<WebElement> tabs = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='index']/li"));
-        app.getAdminHelper().fillProductData(tabs, new ProductData().withProductName("Luxury Red Duck").withProductCode("RD003")
-                .withQuantity("1").withQuantityUnit("pcs").withDeliveryStatus("3-5 days").withSoldOutStatus("Temporary sold out")
-                .withProductImage(productImage).withDateValidFrom("01012022").withDateValidTo("31012022")
-                .withManufacturer("ACME Corp.").withShortDescription(shortDescription).withDescription(description)
-                .withPurchasePriceAmount("25").withPurchasePriceCurrency("US Dollars").withUsdPriceAmount("30")
-                .withCampaignStartDate("05012022").withCampaignStartTime("0000").withCampaignEndDate("15012022")
-                .withCampaignEndTime("2300").withCampaignUSDPriceAmount("22"));
+        app.getAdminHelper().fillProductData(tabs, product);
         app.getAdminHelper().submitProductFrom();
         List<WebElement> after = app.getNavigationHelper().getElementsList(By.xpath("//tr[@class='row']"));
         Assert.assertEquals(before.size() + 1, after.size());
