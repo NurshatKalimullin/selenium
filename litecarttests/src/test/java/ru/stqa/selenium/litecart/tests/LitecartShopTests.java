@@ -90,7 +90,6 @@ public class LitecartShopTests extends ShopTestBase {
     public void testCustomerOnboarding(Customer customer) throws IOException {
         app.getAdminHelper().turnCaptchaOff();
         app.getShopHelper().openShopUrl();
-        long now = System.currentTimeMillis();
         List<WebElement> loginFormElements = app.getNavigationHelper().getElementsList(By.xpath("//form[@name='login_form']//tr"));
         app.getNavigationHelper().clickOnLoginFormItem(loginFormElements, 4);
         app.getShopHelper().fillCustomerForm(customer);

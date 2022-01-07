@@ -1,15 +1,11 @@
 package ru.stqa.selenium.litecart.tests;
 
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.selenium.litecart.model.Product;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
