@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.litecart.model.CustomerData;
+import ru.stqa.selenium.litecart.model.Customer;
 
 import java.io.IOException;
 import java.util.List;
@@ -86,21 +86,17 @@ public class LitecartShopTests extends ShopTestBase {
     }
 
 
-    @Test
-    public void testCustomerOnboarding() throws IOException {
+    @Test(dataProvider = "validCustomer", dataProviderClass = DataProviders.class)
+    public void testCustomerOnboarding(Customer customer) throws IOException {
         app.getAdminHelper().turnCaptchaOff();
         app.getShopHelper().openShopUrl();
         long now = System.currentTimeMillis();
-        String customerEmail = String.format("user%s@mail.com", now);
-        String password = "12345";
         List<WebElement> loginFormElements = app.getNavigationHelper().getElementsList(By.xpath("//form[@name='login_form']//tr"));
         app.getNavigationHelper().clickOnLoginFormItem(loginFormElements, 4);
-        app.getShopHelper().fillCustomerForm(new CustomerData().withFirstName("Frodo").withLastName("Baggins")
-                .withAddress("Shire, The Hole").withPostCode("09475").withCity("Hobbiton").withEmail(customerEmail)
-                .withCountry("United States").withPhoneNumber("+18143511244").withPassword(password));
+        app.getShopHelper().fillCustomerForm(customer);
         app.getNavigationHelper().submitAccountCreation();
         app.getSessionHelper().logOutCustomer();
-        app.getSessionHelper().loginCustomer(customerEmail, password);
+        app.getSessionHelper().loginCustomer(customer.getEmail(), customer.getPassword());
         app.getSessionHelper().logOutCustomer();
     }
 

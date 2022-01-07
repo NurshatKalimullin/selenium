@@ -1,6 +1,7 @@
 package ru.stqa.selenium.litecart.tests;
 
 import org.testng.annotations.DataProvider;
+import ru.stqa.selenium.litecart.model.Customer;
 import ru.stqa.selenium.litecart.model.Product;
 
 import java.io.File;
@@ -21,8 +22,21 @@ public class DataProviders {
                         .withManufacturer("ACME Corp.").withShortDescription(shortDescription).withDescription(description)
                         .withPurchasePriceAmount("25").withPurchasePriceCurrency("US Dollars").withUsdPriceAmount("30")
                         .withCampaignStartDate("05012022").withCampaignStartTime("0000").withCampaignEndDate("15012022")
-                        .withCampaignEndTime("2300").withCampaignUSDPriceAmount("22").build() },
-                /* ... */
+                        .withCampaignEndTime("2300").withCampaignUSDPriceAmount("22").build() }
+        };
+    }
+
+
+    @DataProvider(name = "validCustomer")
+    public static Object[][] validCustomer() {
+        long now = System.currentTimeMillis();
+        String customerEmail = String.format("user%s@mail.com", now);
+        String password = "12345";
+        return new Object[][] {
+                { Customer.newCustomer()
+                        .withFirstName("Frodo").withLastName("Baggins").withAddress("Shire, The Hole")
+                        .withPostCode("09475").withCity("Hobbiton").withEmail(customerEmail).withCountry("United States")
+                        .withPhoneNumber("+18143511244").withPassword(password).build() }
         };
     }
 

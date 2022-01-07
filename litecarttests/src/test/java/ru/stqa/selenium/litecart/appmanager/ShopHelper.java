@@ -3,7 +3,7 @@ package ru.stqa.selenium.litecart.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.stqa.selenium.litecart.model.CustomerData;
+import ru.stqa.selenium.litecart.model.Customer;
 
 import java.io.File;
 import java.io.FileReader;
@@ -21,18 +21,18 @@ public class ShopHelper extends HelperBase {
         properties = new Properties();
     }
 
-    public void fillCustomerForm(CustomerData CustomerData) {
-        type(By.name("firstname"), CustomerData.getFirstName());
-        type(By.name("lastname"), CustomerData.getLastName());
-        type(By.name("address1"), CustomerData.getAddress());
-        type(By.name("postcode"), CustomerData.getPostCode());
-        type(By.name("city"), CustomerData.getCity());
+    public void fillCustomerForm(Customer customer) {
+        type(By.name("firstname"), customer.getFirstName());
+        type(By.name("lastname"), customer.getLastName());
+        type(By.name("address1"), customer.getAddress());
+        type(By.name("postcode"), customer.getPostCode());
+        type(By.name("city"), customer.getCity());
         selectByInput(By.className("select2-selection__arrow"), By.className("select2-search__field"),
-                By.xpath("//li[contains(@id, 'select2-country') and contains(@id, 'US')]"), CustomerData.getCountry());
-        type(By.name("email"), CustomerData.getEmail());
-        type(By.name("phone"), CustomerData.getPhoneNumber());
-        type(By.name("password"), CustomerData.getPassword());
-        type(By.name("confirmed_password"), CustomerData.getPassword());
+                By.xpath("//li[contains(@id, 'select2-country') and contains(@id, 'US')]"), customer.getCountry());
+        type(By.name("email"), customer.getEmail());
+        type(By.name("phone"), customer.getPhoneNumber());
+        type(By.name("password"), customer.getPassword());
+        type(By.name("confirmed_password"), customer.getPassword());
     }
 
 
