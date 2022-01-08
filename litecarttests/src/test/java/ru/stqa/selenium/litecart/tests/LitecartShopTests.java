@@ -56,7 +56,7 @@ public class LitecartShopTests extends ShopTestBase {
         Assert.assertTrue(merchandiseRegularPriceSize < merchandiseCampaignPriceSize);
 
 
-        app.getNavigationHelper().openMerchandisePage(goods, 0);
+        app.getShopHomePageHelper().openMerchandisePage(goods, 0);
         WebElement merchandise = app.getSessionHelper().getElement(By.xpath("//div[@id='box-product']"));
         Assert.assertEquals(app.getSessionHelper().getAttributeValue(merchandise.findElement(By.xpath(".//h1[@class='title']")), "textContent"), merchandiseName);
         Assert.assertEquals(app.getSessionHelper().getAttributeValue(merchandise.findElement(By.xpath(".//s[@class='regular-price']")), "textContent"), merchandiseRegularPrice);
@@ -104,28 +104,27 @@ public class LitecartShopTests extends ShopTestBase {
         List<WebElement> goods = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
         int i = 0;
         while (i < 3) {
-            app.getNavigationHelper().openMerchandisePage(goods, 1);
+            app.getShopHomePageHelper().openMerchandisePage(goods, 1);
             if (app.getShopHelper().isElementPresent(By.xpath("//select[@name='options[Size]']"))) {
-                app.getShopHelper().selectSize(By.xpath("//select[@name='options[Size]']"), "Small");
+                app.getShopProductPageHelper().selectSize(By.xpath("//select[@name='options[Size]']"), "Small");
             }
-            app.getShopHelper().inputMerchandiseQuantity("1");
-            app.getShopHelper().addMerchandiseIntoCart();
+            app.getShopProductPageHelper().inputMerchandiseQuantity("1");
+            app.getShopProductPageHelper().addMerchandiseIntoCart();
             app.getShopHelper().checkElementValue(By.xpath("//span[@class='quantity']"), "textContent", String.valueOf(i + 1));
-            app.getNavigationHelper().goToShopHomePage();
+            app.getShopHomePageHelper().goToShopHomePage();
             i++;
             goods = app.getNavigationHelper().getElementsList(By.xpath("//div[@class='image-wrapper']"));
         }
-        app.getNavigationHelper().openShopCart();
+        app.getShopHomePageHelper().openShopCart();
         int goodsInCart = app.getNavigationHelper().getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
         while (goodsInCart > 0){
             if (app.getShopHelper().isElementPresent(By.xpath("//ul[@class='shortcuts']"))) {
                 List<WebElement> elements = app.getNavigationHelper().getElementsList(By.xpath("//ul[@class='shortcuts']//a"));
-                app.getShopHelper().chooseMerchandiseToDelete(elements, 0);
+                app.getShopCartPageHelper().chooseMerchandiseToDelete(elements, 0);
             } else if (goodsInCart == 1) {
                 break;
             }
-            app.getAdminHelper().isElementClickable(By.xpath("//button[@name='remove_cart_item']"));
-            app.getShopHelper().removeMerchandiseFromCart();
+            app.getShopCartPageHelper().removeMerchandiseFromCart();
             goodsInCart = app.getNavigationHelper().getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
         }
     }

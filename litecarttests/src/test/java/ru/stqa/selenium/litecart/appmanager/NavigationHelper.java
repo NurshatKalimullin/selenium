@@ -12,9 +12,6 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void clickOnMenuItem(List<WebElement> elements, int i) {
-        clickByIndex(elements, i);
-    }
 
     public void clickOnCountry(WebElement element) {
         element.click();
@@ -24,8 +21,10 @@ public class NavigationHelper extends HelperBase{
         wd.findElement(By.xpath("//button[@name='cancel']"));
     }
 
-    public void openMerchandisePage(List<WebElement> merchandise, int i) {
-        clickByIndex(merchandise, i);
+
+
+    public void clickOnMenuItem(List<WebElement> elements, int i) {
+        clickByIndex(elements, i);
     }
 
     public void startAddingNewProduct(List<WebElement> button, int i) {
@@ -38,14 +37,6 @@ public class NavigationHelper extends HelperBase{
 
     public void submitAccountCreation() {
         click(By.name("create_account"));
-    }
-
-    public void goToShopHomePage() {
-        click(By.xpath("//i[@class='fa fa-home']"));
-    }
-
-    public void openShopCart() {
-        click(By.xpath("//div[@id='cart']"));
     }
 
     public void openMerchandiseFolder(By locator) {

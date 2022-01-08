@@ -42,33 +42,5 @@ public class ShopHelper extends HelperBase {
         wd.get(properties.getProperty("web.shopUrl"));
     }
 
-    public void addMerchandiseIntoCart() {
-        click(By.name("add_cart_product"));
-    }
-
-    public void removeMerchandiseFromCart() {
-        WebElement element = wd.findElement(By.name("remove_cart_item"));
-        element.click();
-        isElementDeleted(element);
-    }
-
-
-
-    public void selectSize(By locator, String size) {
-        click(locator);
-        select(locator, size);
-    }
-
-    public void inputMerchandiseQuantity(String number) {
-        type(By.name("quantity"), number);
-    }
-
-    public String getMerchandiseQuantity() {
-        return getElement(By.name("quantity")).getAttribute("value");
-    }
-
-    public void chooseMerchandiseToDelete(List<WebElement> elements, int index) {
-        clickByIndex(elements, index);
-    }
 
 }

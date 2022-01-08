@@ -28,6 +28,9 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private ShopHelper shopHelper;
     private AdminHelper adminHelper;
+    private ShopHomePageHelper shopHomePageHelper;
+    private ShopProductPageHelper shopProductPageHelper;
+    private ShopCartPageHelper shopCartPageHelper;
 
 
     public static class MyListener extends AbstractWebDriverEventListener {
@@ -117,6 +120,9 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         adminHelper = new AdminHelper(wd);
         shopHelper = new ShopHelper(wd);
+        shopHomePageHelper = new ShopHomePageHelper(wd);
+        shopProductPageHelper = new ShopProductPageHelper(wd);
+        shopCartPageHelper = new ShopCartPageHelper(wd);
     }
 
 
@@ -141,4 +147,9 @@ public class ApplicationManager {
         return shopHelper;
     }
 
+    public ShopHomePageHelper getShopHomePageHelper() { return shopHomePageHelper; }
+
+    public ShopProductPageHelper getShopProductPageHelper() { return shopProductPageHelper; }
+
+    public ShopCartPageHelper getShopCartPageHelper() { return shopCartPageHelper; }
 }
