@@ -22,7 +22,6 @@ public class NavigationHelper extends HelperBase{
     }
 
 
-
     public void clickOnMenuItem(List<WebElement> elements, int i) {
         clickByIndex(elements, i);
     }

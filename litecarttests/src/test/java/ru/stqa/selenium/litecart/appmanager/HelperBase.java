@@ -102,11 +102,6 @@ public class HelperBase {
     }
 
 
-    public void checkElementValue(By locator, String attribute, String expectedValue) {
-        WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
-        wait.until(attributeContains(locator, attribute, expectedValue));
-    }
-
     public void checkNewWindow(WebElement element){
         WebDriverWait wait = new WebDriverWait(wd, 10/*seconds*/);
         String originalWindow = wd.getWindowHandle();

@@ -16,10 +16,23 @@ public class ShopCartPageHelper extends HelperBase {
         clickByIndex(elements, index);
     }
 
-    public void removeMerchandiseFromCart() {
+    public void dropMerchandiseFromCart() {
         isElementClickable(By.name("remove_cart_item"));
         WebElement element = wd.findElement(By.name("remove_cart_item"));
         element.click();
         isElementDeleted(element);
+    }
+
+    public int getNumberOfGoodsInCart() {
+        int goodsInCart = getElementsList(By.xpath("//a[@class='image-wrapper shadow']")).size();
+        return goodsInCart;
+    }
+
+    public List<WebElement> getGoodsInCard() {
+        return getElementsList(By.xpath("//ul[@class='shortcuts']//a"));
+    }
+
+    public boolean isThereMultipleNumberOfGoodsInCart() {
+        return isElementPresent(By.xpath("//ul[@class='shortcuts']"));
     }
 }
